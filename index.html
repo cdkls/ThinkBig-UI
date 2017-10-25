@@ -34,6 +34,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <!-- start-smooth-scrolling -->
+<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/controller/home-controller.js"></script>
+<script type="text/javascript" src="js/services/home-service.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -45,7 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //end-smooth-scrolling -->
 </head>
 	
-<body>
+<body ng-app ='ThinkBig'>
 <!-- header -->
 	<div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
 		aria-hidden="true">
@@ -176,7 +181,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span class="icon-bar"></span>
 					</button>
 				</div> 
-				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs" ng-controller="HomeController" ng-init="loadCategories()">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="index.html" class="act">Home</a></li>	
 						<!-- Mega Menu -->
@@ -185,13 +190,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="dropdown-menu multi-column columns-3">
 								<div class="row">
 									<div class="col-sm-3">
-										<ul class="multi-column-dropdown">
-											<h6>Clothing</h6>
-											<li><a href="dresses.html">Dresses<span>New</span></a></li>
-											<li><a href="sweaters.html">Sweaters</a></li>
-											<li><a href="skirts.html">Shorts & Skirts</a></li>
-											<li><a href="jeans.html">Jeans</a></li>
-											<li><a href="shirts.html">Shirts & Tops<span>New</span></a></li>
+										<h6 id="clothing">Clothing</h6>
+										<ul class="multi-column-dropdown"  ng-repeat="category in categories">
+											<li><a href="sweaters.html">{{category.categoryName}}</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">

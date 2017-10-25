@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
     });
 
 app.get('/home', function (req, res) {
-    res.sendfile('view/home.html');
+    res.sendfile('index.html');
     });
 
 console.log("Think Big UI listening on port 3000");
