@@ -2,8 +2,11 @@ angular.module('ThinkBig', ['ngResource']);
 
 angular.module('ThinkBig').config(configFunction);
 
-configFunction.$inject = ['$resourceProvider'];
+configFunction.$inject = ['$resourceProvider','$locationProvider'];
 
-function configFunction($resourceProvider) {
-	
+function configFunction($resourceProvider, $locationProvider) {
+	$locationProvider.html5Mode({
+		  enabled: true,
+		  requireBase: false
+		});
 };

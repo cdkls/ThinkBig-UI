@@ -31,6 +31,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //for bootstrap working -->
 <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/controller/home-controller.js"></script>
+<script type="text/javascript" src="js/controller/product-controller.js"></script>
+<script type="text/javascript" src="js/services/home-service.js"></script>
 <!-- start-smooth-scrolling -->
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -43,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //end-smooth-scrolling -->
 </head>
 	
-<body>
+<body ng-app ='ThinkBig' ng-controller="ProductController" ng-init="loadProductDetails()">
 <!-- header -->
 	<div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 		aria-hidden="true">
@@ -180,13 +186,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="dropdown-menu multi-column columns-3">
 								<div class="row">
 									<div class="col-sm-3">
-										<ul class="multi-column-dropdown">
-											<h6>Clothing</h6>
-											<li><a href="dresses.html">Dresses<span>New</span></a></li>
-											<li><a href="sweaters.html">Sweaters</a></li>
-											<li><a href="skirts.html">Shorts & Skirts</a></li>
-											<li><a href="jeans.html">Jeans</a></li>
-											<li><a href="shirts.html">Shirts & Tops<span>New</span></a></li>
+										<h6  id="clothing">Clothing</h6>
+										<ul class="multi-column-dropdown"  ng-repeat="category in categories">
+											<li><a href="" ng-click="redirectToPage(category.categoryName)">{{category.categoryName}}</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
@@ -250,15 +252,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="col-md-4 single-left">
 				<div class="flexslider">
 					<ul class="slides">
-						<li data-thumb="images/a.jpg">
-							<div class="thumb-image"> <img src="images/a.jpg" data-imagezoom="true" class="img-responsive"> </div>
+						<li ng-repeat="image in productDetails.productImages" data-thumb="{{image}}">
+							<div class="thumb-image"> <img src="{{image}}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="images/b.jpg">
-							 <div class="thumb-image"> <img src="images/b.jpg" data-imagezoom="true" class="img-responsive"> </div>
-						</li>
-						<li data-thumb="images/c.jpg">
-						   <div class="thumb-image"> <img src="images/c.jpg" data-imagezoom="true" class="img-responsive"> </div>
-						</li> 
 					</ul>
 				</div>
 				<!-- flixslider -->
@@ -279,7 +275,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- //zooming-effect -->
 			</div>
 			<div class="col-md-8 single-right">
-				<h3>Swan Miami Red Skirt</h3>
+				<h3>{{productDetails.productName}}</h3>
 				<div class="rating1">
 					<span class="starRating">
 						<input id="rating5" type="radio" name="rating" value="5">
@@ -296,20 +292,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 					<div class="description">
 						<h5><i>Description</i></h5>
-						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-							eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-							Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut 
-							odit aut fugit, sed quia consequuntur magni dolores eos qui 
-							ratione voluptatem sequi nesciunt.</p>
+						<p>{{productDetails.productDescription}}</p>
 					</div>
 					<div class="color-quality">
 						<div class="color-quality-left">
 							<h5>Color : </h5>
 							<ul>
-								<li><a href="#"><span></span>Red</a></li>
-								<li><a href="#" class="brown"><span></span>Yellow</a></li>
-								<li><a href="#" class="purple"><span></span>Purple</a></li>
-								<li><a href="#" class="gray"><span></span>Violet</a></li>
+								<li ng-repeat="color in productDetails.productColors"><a href="#" class="{{color | lowercase}}"><span></span>{{color}}</a></li>
 							</ul>
 						</div>
 						<div class="color-quality-right">
@@ -358,7 +347,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
 					</div>
 					<div class="simpleCart_shelfItem">
-							<p><span>$320</span> <i class="item_price">$250</i></p>
+							<p><span>{{productDetails.productPrice}}</span> <i class="item_price">{{productDetails.productOfferPrice}}</i></p>
 							<p><a class="item_add" href="#">Add to cart</a></p>
 						</div>
 
@@ -376,16 +365,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Reviews</span></li>
 					</ul>		
 					<div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_item-0">
-						<h3>Swan Miami Red Skirt</h3>
-						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-							eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-							Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut 
-							odit aut fugit, sed quia consequuntur magni dolores eos qui 
-							ratione voluptatem sequi nesciunt.Ut enim ad minima veniam, quis nostrum 
-							exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea 
-							commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate 
-							velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat 
-							quo voluptas nulla pariatur.</p>
+						<h3>{{productDetails.productName}}</h3>
+						<p>{{productDetails.productDescription}}</p>
 					</div>	
 
 					<div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_item-1">
