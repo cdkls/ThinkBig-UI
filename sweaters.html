@@ -30,6 +30,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //for bootstrap working -->
 <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/controller/home-controller.js"></script>
+<script type="text/javascript" src="js/controller/product-controller.js"></script>
+<script type="text/javascript" src="js/services/home-service.js"></script>
 <!-- start-smooth-scrolling -->
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -42,7 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //end-smooth-scrolling -->
 </head>
 	
-<body>
+<body ng-app ='ThinkBig'  ng-controller="HomeController" ng-init="loadCategories()">
 <!-- header -->
 	<div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 		aria-hidden="true">
@@ -179,13 +185,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="dropdown-menu multi-column columns-3">
 								<div class="row">
 									<div class="col-sm-3">
-										<ul class="multi-column-dropdown">
-											<h6>Clothing</h6>
-											<li><a href="dresses.html">Dresses<span>New</span></a></li>
-											<li><a href="sweaters.html">Sweaters</a></li>
-											<li><a href="skirts.html">Shorts & Skirts</a></li>
-											<li><a href="jeans.html">Jeans</a></li>
-											<li><a href="shirts.html">Shirts & Tops<span>New</span></a></li>
+										<h6 id="clothing">Clothing</h6>
+										<ul class="multi-column-dropdown"  ng-repeat="category in categories">
+											<li><a href="sweaters.html">{{category.categoryName}}</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3">
@@ -373,18 +375,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="clearfix"> </div>
 					</div>
-					<div class="w3ls_dresses_grid_right_grid3">
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
+					<div class="w3ls_dresses_grid_right_grid3" ng-controller="ProductController" ng-init="loadProducts()">
+						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses" ng-repeat="product in products">
 							<div class="agile_ecommerce_tab_left dresses_grid">
 								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<img src="images/s8.jpg" alt=" " class="img-responsive" />
+									<img ng-repeat="pImage in product.productImages" src="{{pImage}}" alt=" " class="img-responsive" />
 									<div class="w3_hs_bottom w3_hs_bottom_sub1">
 										<ul>
 											<li>
@@ -393,233 +388,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</ul>
 									</div>
 								</div>
-								<h5><a href="single.html">Sweater</a></h5>
+								<h5><a href="single.html{{product}}">{{product.productName}}</a></h5>
 								<div class="simpleCart_shelfItem">
-									<p><span>$420</span> <i class="item_price">$340</i></p>
+									<p><span>{{product.productPrice}}</span> <i class="item_price">{{product.productOfferPrice}}</i></p>
 									<p><a class="item_add" href="#">Add to cart</a></p>
 								</div>
 								<div class="dresses_grid_pos">
 									<h6>New</h6>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<img src="images/s8.jpg" alt=" " class="img-responsive" />
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<h5><a href="single.html">Sweater</a></h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>$320</span> <i class="item_price">$250</i></p>
-									<p><a class="item_add" href="#">Add to cart</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<img src="images/s8.jpg" alt=" " class="img-responsive" />
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<h5><a href="single.html">Sweater</a></h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>$231</span> <i class="item_price">$200</i></p>
-									<p><a class="item_add" href="#">Add to cart</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="w3ls_dresses_grid_right_grid3">
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<img src="images/s8.jpg" alt=" " class="img-responsive" />
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<h5><a href="single.html">Sweater</a></h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>$323</span> <i class="item_price">$270</i></p>
-									<p><a class="item_add" href="#">Add to cart</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<img src="images/s8.jpg" alt=" " class="img-responsive" />
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<h5><a href="single.html">Sweater</a></h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>$233</span> <i class="item_price">$190</i></p>
-									<p><a class="item_add" href="#">Add to cart</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<img src="images/s8.jpg" alt=" " class="img-responsive" />
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<h5><a href="single.html">Sweater</a></h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>$342</span> <i class="item_price">$270</i></p>
-									<p><a class="item_add" href="#">Add to cart</a></p>
-								</div>
-								<div class="dresses_grid_pos">
-									<h6>New</h6>
-								</div>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="w3ls_dresses_grid_right_grid3">
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s8.jpg" alt=" " class="img-responsive" />
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<h5><a href="single.html">Sweater</a></h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>$312</span> <i class="item_price">$212</i></p>
-									<p><a class="item_add" href="#">Add to cart</a></p>
-								</div>
-								<div class="dresses_grid_pos">
-									<h6>New</h6>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<img src="images/s8.jpg" alt=" " class="img-responsive" />
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<h5><a href="single.html">Sweater</a></h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>$234</span> <i class="item_price">$180</i></p>
-									<p><a class="item_add" href="#">Add to cart</a></p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="images/s9.jpg" alt=" " class="img-responsive" />
-									<img src="images/s1.jpg" alt=" " class="img-responsive" />
-									<img src="images/s2.jpg" alt=" " class="img-responsive" />
-									<img src="images/s3.jpg" alt=" " class="img-responsive" />
-									<img src="images/s4.jpg" alt=" " class="img-responsive" />
-									<img src="images/s5.jpg" alt=" " class="img-responsive" />
-									<img src="images/s6.jpg" alt=" " class="img-responsive" />
-									<img src="images/s7.jpg" alt=" " class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<h5><a href="single.html">Sweater</a></h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>$323</span> <i class="item_price">$250</i></p>
-									<p><a class="item_add" href="#">Add to cart</a></p>
 								</div>
 							</div>
 						</div>
@@ -962,7 +737,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 			<div class="container">
-				<p>&copy; 2016 Women's Fashion. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+				<p>&copy; 2016 Women's Fashion. All rights reserved | Design by Think Big</p>
 			</div>
 		</div>
 	</div>
