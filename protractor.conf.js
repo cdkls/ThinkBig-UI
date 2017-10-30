@@ -1,5 +1,5 @@
 exports.config = {
-baseUrl: 'http://localhost:3000',
+baseUrl: 'http://thinkbigshop.cfapps.io',
 
     capabilities: {
         'browserName': 'chrome'
