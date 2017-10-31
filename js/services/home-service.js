@@ -6,7 +6,7 @@ function HomeService($resource){
 	this.loadProductsDetails = loadProductsDetails;
 	
 	function loadCategories(){
-		return $resource('http://thinkbigshop.cfapps.io/categories/all').query({
+		return $resource('https://thinkbigshop.cfapps.io/categories/all').query({
             method : 'GET',
             isArray: true
         }).$promise;
@@ -14,7 +14,7 @@ function HomeService($resource){
 	}
 	
 	function loadProducts(){
-		return $resource('http://thinkbigshop.cfapps.io/products/all').query({
+		return $resource('https://thinkbigshop.cfapps.io/products/all').query({
             method : 'GET',
             isArray: true
         }).$promise;
@@ -22,7 +22,7 @@ function HomeService($resource){
 	
 	function loadProductsDetails(id){
 		var product = createAngularResource(
-				'http://thinkbigshop.cfapps.io/products/findById/:id', {
+				'https://thinkbigshop.cfapps.io/products/findById/:id', {
 					id : id
 				});
 		return product.get({}).$promise;
