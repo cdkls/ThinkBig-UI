@@ -1,12 +1,12 @@
 exports.config = {
-baseUrl: 'http://thinkbigshop.cfapps.io',
+baseUrl: 'http://localhost:8080',
 
     capabilities: {
         'browserName': 'chrome'
     },
 
     specs: [
-        './test/e2e/home-page-spec.js'
+        './test/e2e/tests/Home/home-page-spec.js'
     ],
 
     framework: 'jasmine',
